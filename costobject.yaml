@@ -1,0 +1,222 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "costObjectServices/manageCostObject",
+    "version" : "v1"
+  },
+  "servers" : [ {
+    "url" : "https://erlmasterint.ibsplc.org/iLogisticsCloud/api/core/v1/rest/costObjectServices/manageCostObject"
+  } ],
+  "paths" : {
+    "/" : {
+      "description" : "manageCostObject",
+      "post" : {
+        "parameters" : [ {
+          "name" : "x-auth-channel",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "x-auth-token",
+          "in" : "header",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "x-session-token",
+          "in" : "header",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "*/*" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/costObjRequestInVO"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "600" : {
+            "description" : "",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/errorDetails"
+                }
+              }
+            }
+          },
+          "601" : {
+            "description" : "",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/errorDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "requestTranVo" : {
+        "type" : "object",
+        "properties" : {
+          "reqExgId" : {
+            "type" : "string"
+          },
+          "reqStatus" : {
+            "type" : "string"
+          },
+          "reqFromDateTime" : {
+            "type" : "string"
+          },
+          "reqToDateTime" : {
+            "type" : "string"
+          },
+          "reqRemarks" : {
+            "type" : "string"
+          },
+          "reqObjRef" : {
+            "type" : "string"
+          },
+          "reqTranId" : {
+            "type" : "string"
+          }
+        }
+      },
+      "requestInBaseVo" : {
+        "type" : "object",
+        "properties" : {
+          "requestTranVo" : {
+            "$ref" : "#/components/schemas/requestTranVo"
+          }
+        }
+      },
+      "errorSeverity" : {
+        "type" : "string"
+      },
+      "errorVO" : {
+        "type" : "object",
+        "properties" : {
+          "validationMethod" : {
+            "type" : "string"
+          },
+          "correlationId" : {
+            "type" : "string"
+          }
+        },
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/messageVO"
+        } ]
+      },
+      "messageVO" : {
+        "type" : "object",
+        "properties" : {
+          "severity" : {
+            "$ref" : "#/components/schemas/errorSeverity"
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "defaultMessage" : {
+            "type" : "string"
+          },
+          "arguments" : {
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "format" : "anyType"
+            }
+          },
+          "moreInfo" : {
+            "type" : "object",
+            "format" : "anyType"
+          }
+        }
+      },
+      "costObjRequestInVO" : {
+        "type" : "object",
+        "properties" : {
+          "reqBo" : {
+            "$ref" : "#/components/schemas/costObjRequestWSVO"
+          }
+        },
+        "allOf" : [ {
+          "$ref" : "#/components/schemas/requestInBaseVo"
+        } ]
+      },
+      "costObjRequestWSVO" : {
+        "type" : "object",
+        "properties" : {
+          "freeAttribute7" : {
+            "type" : "string"
+          },
+          "freeAttribute6" : {
+            "type" : "string"
+          },
+          "freeAttribute5" : {
+            "type" : "string"
+          },
+          "freeAttribute4" : {
+            "type" : "string"
+          },
+          "freeAttribute3" : {
+            "type" : "string"
+          },
+          "freeAttribute2" : {
+            "type" : "string"
+          },
+          "freeAttribute1" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "costObjectType" : {
+            "type" : "string"
+          },
+          "costOwner" : {
+            "type" : "string"
+          },
+          "freeAttribute8" : {
+            "type" : "string"
+          },
+          "legalEntity" : {
+            "type" : "string"
+          },
+          "costOwnerType" : {
+            "type" : "string"
+          },
+          "costObjectCode" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          }
+        }
+      },
+      "errorDetails" : {
+        "type" : "object",
+        "properties" : {
+          "errors" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/errorVO"
+            }
+          }
+        }
+      }
+    }
+  }
+}
